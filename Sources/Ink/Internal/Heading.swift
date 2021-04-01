@@ -26,7 +26,7 @@ internal struct Heading: Fragment {
         )
 
         let tagName = "h\(level)"
-        return "<\(tagName)>\(body)</\(tagName)>"
+        return "<\(tagName) id=\"\(body.idFromBody())\">\(body)</\(tagName)>"
     }
 
     func plainText() -> String {
@@ -50,5 +50,13 @@ private extension Heading {
         }
 
         return text
+    }
+}
+
+fileprivate extension String {
+    func idFromBody() -> String {
+        var final = self.lowercased()
+        final = final.replacingOccurrences(of: " ", with: "-")
+        return final
     }
 }
